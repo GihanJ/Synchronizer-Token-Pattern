@@ -50,5 +50,6 @@ public class HomeController extends HttpServlet
 	        out.println("</script>");
 	     }
 	    out.println("</body>");
+	    out.println("</html>");
 	 }
 }

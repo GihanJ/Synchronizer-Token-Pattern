@@ -25,22 +25,22 @@ public class SignInController extends HttpServlet
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String email = request.getParameter("email");
-	    String password = request.getParameter("password");
-	    HttpSession session = request.getSession(true); // create a new session if not exists
+		String email = request.getParameter("email"); //Retrieving email field value
+	    String password = request.getParameter("password"); //Retrieving password field value
+	    HttpSession session = request.getSession(true); // Create a new session if not exists
 
-	    if (Credentials.isValidUser(email, password))
+	    if (Credentials.isValidUser(email, password)) //Validating credentials
 	    {
 	      String csrfToken = createToken(session.getId());
-	      csrfTokenStore.put(session.getId(), csrfToken); // adding to token store
-	      response.addCookie(CookieFunction.COOKIE_WITH_SESSION_ID.apply(session));
+	      csrfTokenStore.put(session.getId(), csrfToken); // Storing to token collection against session ID
+	      response.addCookie(CookieFunction.COOKIE_WITH_SESSION_ID.apply(session)); //Adding a cookie with the session ID
 	      response.sendRedirect("jsp/Home.jsp");
 	    }
 	    else
 	    {
-	      response.sendRedirect("SignIn.jsp");
+	    	response.sendRedirect("SignIn.jsp");
 	    }
-	  }
+	 }
 	 private String createToken(String strClearText)
 	 {
 	    return strClearText + "." + createRandomString();
