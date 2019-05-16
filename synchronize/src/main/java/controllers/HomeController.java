@@ -1,8 +1,6 @@
 package controllers;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,23 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/HomeController")
-public class HomeController extends HttpServlet{
-
+public class HomeController extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
 	
-	
-	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	  {
-
-		  
-	    HttpSession session = request.getSession(false);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		HttpSession session = request.getSession(false);
 	    String hiddenToken = request.getParameter("myHiddenField");
-
 	    String csrfToken = SignInController.csrfTokenStore.get(session.getId());
 	 
 	    response.setContentType("text/html");
-	 
-	      
 	    PrintWriter out = response.getWriter();
 	    out.println("<html>");
         out.println("<head>");
@@ -36,6 +28,7 @@ public class HomeController extends HttpServlet{
     	out.println("<link rel='stylesheet' type='text/css' href= './css/sweetalert2.css' />");
     	out.println("</head>");
     	out.println("<body>");
+    	
 	    if (csrfToken.equals(hiddenToken))
 	    {
 	    	out.println("<script>");
@@ -44,10 +37,8 @@ public class HomeController extends HttpServlet{
 	        		"  '***Amount Transferred***',\r\n" + 
 	        		"  'success'\r\n" + 
 	        		")");
-	       out.println("</script>");
-	        
-	        
-	    }
+	        out.println("</script>");
+	     }
 	    else
 	    {
 	    	out.println("<script>");
@@ -59,8 +50,5 @@ public class HomeController extends HttpServlet{
 	        out.println("</script>");
 	     }
 	    out.println("</body>");
-	   
-	  }
-
-
+	 }
 }

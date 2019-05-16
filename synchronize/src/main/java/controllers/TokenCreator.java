@@ -1,5 +1,4 @@
 package controllers;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,25 +11,24 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 @WebServlet("/TokenCreator")
-public class TokenCreator extends HttpServlet {
+public class TokenCreator extends HttpServlet 
+{
 
-	
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	  {
+	{
 	    HttpSession session = request.getSession(false);
 
 	    if (session != null)
 	    {
 	      response.setStatus(200);
-
 	      Map<String, String> returnMap = new HashMap<String, String>();
 	      returnMap.put("CSRF_key", SignInController.csrfTokenStore.get(session.getId()));
 	      String json = new Gson().toJson(returnMap);
 	      response.setContentType("application/json");
 	      response.getWriter().write(json);
 	    }
-	  }
+	}
 
 }
