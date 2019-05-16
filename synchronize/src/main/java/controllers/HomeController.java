@@ -16,8 +16,8 @@ public class HomeController extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		HttpSession session = request.getSession(false);
-	    String hiddenToken = request.getParameter("myHiddenField");
-	    String csrfToken = SignInController.csrfTokenStore.get(session.getId());
+	    String formToken = request.getParameter("myHiddenField"); //getting token from the submitted form as a parameter
+	    String csrfToken = SignInController.csrfTokenStore.get(session.getId()); //getting token from the token store which is stored against the sessionID
 	 
 	    response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
@@ -29,7 +29,7 @@ public class HomeController extends HttpServlet
     	out.println("</head>");
     	out.println("<body>");
     	
-	    if (csrfToken.equals(hiddenToken))
+	    if (csrfToken.equals(formToken)) //comparing tokens
 	    {
 	    	out.println("<script>");
 	        out.println("Swal.fire(\r\n" + 
