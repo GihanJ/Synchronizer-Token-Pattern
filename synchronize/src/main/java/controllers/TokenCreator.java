@@ -24,7 +24,7 @@ public class TokenCreator extends HttpServlet
 	    {
 	      response.setStatus(200);
 	      Map<String, String> returnMap = new HashMap<String, String>();
-	      returnMap.put("CSRF_key", SignInController.csrfTokenStore.get(session.getId()));
+	      returnMap.put("CSRF_key", SignInController.csrfTokenStore.get(session.getId())); //Storing the token
 	      String json = new Gson().toJson(returnMap);
 	      response.setContentType("application/json");
 	      response.getWriter().write(json);
