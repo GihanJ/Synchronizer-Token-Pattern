@@ -8,3 +8,4 @@ Run As      --> Run on Server
 To access the web application http://localhost:8080/synchronize/
 
 Credentials --> Email = gihan@gmail.com , Password = csrf
+NOTE : After doing the maven update if CookieFunction.java will give an error ,move the cursor to the error line and perform the quick fix "change project compliance and JRE to 1.8"
